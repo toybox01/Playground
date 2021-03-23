@@ -1,0 +1,92 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Drag</title>
+<style>
+#container {
+	width: 100%;
+	height: 400px;
+	background-color: #333;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border-radius: 7px;
+	touch-action: none;
+}
+#item {
+	width: 100px;
+	height: 100px;
+	background-color: rgb(245, 230, 99);
+	border: 10px solid rgba(136, 136, 136, .5);
+	border-radius: 50%;
+	touch-action: none;
+	user-select: none;
+}
+#item:active {
+	background-color: rgba(168, 218, 220, 1.00);
+}
+#item:hover {
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div id="container">
+	<div id="item">
+	</div>
+</div>
+<center id="pos"></center>
+<script type="text/javascript">
+var dragItem = document.querySelector("#item");
+var container = document.querySelector("#container");
+
+var active = false;
+var x = {offset: 0, limit: (container.offsetWidth - dragItem.offsetWidth) / 2 - 10};
+var y = {offset: 0, limit: (container.offsetHeight - dragItem.offsetHeight) / 2 - 10};
+
+container.addEventListener("touchstart", dragStart, false);
+container.addEventListener("touchend", dragEnd, false);
+container.addEventListener("touchmove", drag, false);
+
+container.addEventListener("mousedown", dragStart, false);
+container.addEventListener("mouseup", dragEnd, false);
+container.addEventListener("mousemove", drag, false);
+
+function dragStart(e) {
+	if (e.target === dragItem) {
+		if (e.type === "touchstart") {
+			e = e.touches[0];
+		}
+		active = true;
+		x.init = e.clientX - x.offset;
+		y.init = e.clientY - y.offset;
+	}
+}
+
+function dragEnd(e) {
+	if (active) {
+		active = false;
+		setTranslate(0, 0);
+	}
+}
+
+function drag(e) {
+	if (active) {
+		e.preventDefault();
+		if (e.type === "touchmove") {
+			e = e.touches[0];
+		}
+		setTranslate(e.clientX - x.init, e.clientY - y.init);
+	}
+}
+
+function setTranslate(xPos, yPos) {
+	x.offset = Math.max(Math.min(xPos, x.limit), x.limit * -1);
+	y.offset = Math.max(Math.min(yPos, y.limit), y.limit * -1);
+	dragItem.style.transform = "translate3d(" + x.offset + "px, " + y.offset + "px, 0)";
+	document.querySelector("#pos").innerHTML = "(" + parseInt(255 / x.limit * x.offset) + ", " + parseInt(255 / y.limit * y.offset * -1) + ")";
+}
+</script>
+</body>
+</html>
