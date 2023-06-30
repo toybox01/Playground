@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>T1</title>
+</head>
+<body>
+<p>1. enter <input type="number" placeholder="enter" step="any" inputmode="decimal" enterkeyhint="enter"></p>
+<p>2. done <input type="number" placeholder="done" step="any" inputmode="decimal" enterkeyhint="done"></p>
+<p>3. go <input type="number" placeholder="go" step="any" inputmode="decimal" enterkeyhint="go"></p>
+<p>4. next <input type="number" placeholder="next" step="any" inputmode="decimal" enterkeyhint="next"></p>
+<p>5. previous <input type="number" placeholder="previous" step="any" inputmode="decimal" enterkeyhint="previous"></p>
+<p>6. search <input type="number" placeholder="search" step="any" inputmode="decimal" enterkeyhint="search"></p>
+<p>7. send <input type="number" placeholder="send" step="any" inputmode="decimal" enterkeyhint="send"></p>
+<script>
+var el = document.getElementsByTagName('input');
+for (var i = 0; i < el.length; i++) {
+	el[i].addEventListener('keyup', function(e) {
+		this.value = e.keyCode;
+	});
+}
+</script>
+</body>
+</html>
