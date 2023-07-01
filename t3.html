@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>T3</title>
+</head>
+<body>
+<p>1. enter <input type="text" pattern="\d*" placeholder="enter" enterkeyhint="enter"></p>
+<p>2. done <input type="text" pattern="\d*" placeholder="done" enterkeyhint="done"></p>
+<p>3. go <input type="text" pattern="\d*" placeholder="go" enterkeyhint="go"></p>
+<p>4. next <input type="text" pattern="\d*" placeholder="next" enterkeyhint="next"></p>
+<p>5. previous <input type="text" pattern="\d*" placeholder="previous" enterkeyhint="previous"></p>
+<p>6. search <input type="text" pattern="\d*" placeholder="search" enterkeyhint="search"></p>
+<p>7. send <input type="text" pattern="\d*" placeholder="send" enterkeyhint="send"></p>
+<script>
+var el = document.getElementsByTagName('input');
+for (var i = 0; i < el.length; i++) {
+	el[i].addEventListener('keyup', function(e) {
+		this.value = e.keyCode;
+	});
+}
+</script>
+</body>
+</html>
